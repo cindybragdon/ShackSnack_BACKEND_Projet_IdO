@@ -1,0 +1,5 @@
+npm init
+
+
+base de donnée : 
+npm i mongoose
