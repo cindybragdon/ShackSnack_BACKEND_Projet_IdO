@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
 import { regexPositiveInt, regexPositiveNumber } from "../utils/regex";
+import createModel from "./manageModels";
 
 const animalShemaDefinition = new Schema({
     name: {
@@ -41,5 +42,10 @@ const animalShemaDefinition = new Schema({
     }
 }, { timestamps: true })
 
+const AnimalModel = createModel("Animal", animalShemaDefinition);
+
 export default animalShemaDefinition;
+
+export { AnimalModel };
+
 

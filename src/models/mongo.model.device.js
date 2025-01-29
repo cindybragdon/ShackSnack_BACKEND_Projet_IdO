@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+import createModel from "./manageModels";
 
 const deviceShemaDefinition = new Schema({
     name: {
@@ -11,4 +12,11 @@ const deviceShemaDefinition = new Schema({
     }
 })
 
+
+const DeviceModel = createModel("Device", deviceShemaDefinition);
+
+
+
 export default deviceShemaDefinition;
+
+export { DeviceModel };

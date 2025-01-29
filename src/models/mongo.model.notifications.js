@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+import createModel from "./manageModels";
 
 const notificationsShemaDefinition = new Schema({
 
@@ -12,4 +13,8 @@ const notificationsShemaDefinition = new Schema({
     }
 }, { timestamps: true })
 
+const NotificationModel = createModel("Notification", notificationsShemaDefinition);
+
 export default notificationsShemaDefinition;
+
+export { NotificationModel };

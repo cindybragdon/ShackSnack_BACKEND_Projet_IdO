@@ -34,6 +34,6 @@ const feedingLogs = Schema({
 }, { timestamps: true });
 
 
-const LogModel = createModel('FeedingLogs', feedingLogs);
+const feedingLogsModel = createModel('FeedingLogs', feedingLogs);
 
-export default LogModel;
+export default feedingLogsModel;
