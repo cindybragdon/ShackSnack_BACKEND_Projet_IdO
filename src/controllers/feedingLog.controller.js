@@ -1,8 +1,9 @@
-import feedingLogsModel from "../models/mongo.model.feedinglogs";
+import feedingLogsModel from "../models/mongo.model.feedinglogs.js";
+import BaseService from "../services/mongo.baseService.js";
 
 class FeedingLogsController {
     constructor() {
-        this.baseService = BaseService(feedingLogsModel)
+        this.baseService = new BaseService(feedingLogsModel)
     }
 
     

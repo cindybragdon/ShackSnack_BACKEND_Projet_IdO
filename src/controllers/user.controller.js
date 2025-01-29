@@ -1,9 +1,11 @@
-import userMongoModel from "../models/mongo.model.user";
+import userMongoModel from "../models/mongo.model.user.js";
+import BaseService from "../services/mongo.baseService.js";
+import SubdocumentService from "../services/mongo.SubdocumentService.js";
 
 class UserController {
     constructor() {
-        this.baseService = BaseService(userMongoModel);
-        this.subdocumentService = SubdocumentService(userMongoModel);
+        this.baseService = new BaseService(userMongoModel);
+        this.subdocumentService = new SubdocumentService(userMongoModel);
     }
 
     async getAllUsers(req, res) {

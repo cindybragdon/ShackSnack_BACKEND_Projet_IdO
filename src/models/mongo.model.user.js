@@ -1,9 +1,9 @@
 import { Schema } from "mongoose";
-import { regexEmail } from "../utils/regex";
-import createModel from "./manageModels";
-import animalShemaDefinition from "./mongo.model.animal";
-import deviceShemaDefinition from "./mongo.model.device";
-import notificationsShemaDefinition from "./mongo.model.notifications";
+import { regexEmail } from "../utils/regex.js";
+import createModel from "./manageModels.js";
+import animalShemaDefinition from "./mongo.model.animal.js";
+import deviceShemaDefinition from "./mongo.model.device.js";
+import notificationsShemaDefinition from "./mongo.model.notifications.js";
 
 const userSchemaDefinition = new Schema({
 

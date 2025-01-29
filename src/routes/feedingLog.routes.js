@@ -1,6 +1,6 @@
 import express from 'express';
-import FeedingLogsController from '../controllers/feedingLog.controller';
-import { validateFormatMiddleware } from '../middlewares/invalidationsMiddleware';
+import FeedingLogsController from '../controllers/feedingLog.controller.js';
+import { validateFormatMiddleware } from '../middlewares/invalidationsMiddleware.js';
 
 
 const feedingLogsController = new FeedingLogsController();
@@ -15,3 +15,5 @@ router.get('/users/:id', feedingLogsController.getFeedingLogById, validateFormat
 router.post('/users', feedingLogsController.createFeedingLog, validateFormatMiddleware);
 router.put('/users/:id', feedingLogsController.updateFeedingLog, validateFormatMiddleware);
 router.delete('/users/:id', feedingLogsController.deleteFeedingLog, validateFormatMiddleware);
+
+export default router;

@@ -1,6 +1,6 @@
 import express from 'express';
-import UserController from '../controllers/user.controller';
-import { validateFormatMiddleware } from '../middlewares/invalidationsMiddleware';
+import UserController from '../controllers/user.controller.js';
+import { validateFormatMiddleware } from '../middlewares/invalidationsMiddleware.js';
 
 
 const userController = new UserController();
@@ -22,7 +22,5 @@ router.get('/users/:id/:subdocument/:subdocId', userController.getSubdocumentByI
 router.post('/users/:id/:subdocument', userController.createSubdocument, validateFormatMiddleware);
 router.put('/users/:id/:subdocument/:subdocId', userController.updateSubdocument, validateFormatMiddleware);
 router.delete('/users/:id/:subdocument/:subdocId', userController.deleteSubdocument, validateFormatMiddleware);
-
-
 
 export default router;

@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
-import { regexPositiveInt, regexPositiveNumber } from "../utils/regex";
-import createModel from "./manageModels";
+import { regexPositiveInt, regexPositiveNumber } from "../utils/regex.js";
+import createModel from "./manageModels.js";
 
 const animalShemaDefinition = new Schema({
     name: {

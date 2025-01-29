@@ -112,3 +112,5 @@ class SubdocumentService {
         );
     }
 }
+
+export default SubdocumentService;

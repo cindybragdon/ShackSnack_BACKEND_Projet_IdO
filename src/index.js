@@ -1,26 +1,29 @@
 import express from 'express';
-import { config } from "./config/config";
-import { connectToMongoDatabase } from './data/databaseMongo';
-import userRoutes from "./routes/user.routes";
-import feedingLogsRoutes from "./routes/feedingLog.routes";
-import { errorMiddleware } from './middlewares/errorMiddleware';
+import cors from 'cors';
+import { config } from './config/config.js';
+import userRoutes from './routes/user.routes.js';
+import feedingLogsRoutes from './routes/feedingLog.routes.js';
+import { errorMiddleware } from './middlewares/errorMiddleware.js';
+import { connectToMongoDatabase } from './utils/mongo.connectToDatabase.js';
 
-const cors = require('cors');
+// import fs from 'fs';
+// import https from 'https';
+
+
+
 const app = express();
 const port = config.port;
-const https = require('https');
-const fs = require('fs')
-
 
 
 app.use(cors());
 
+/*
 const options = {
   key: fs.readFileSync('./src/keys/key.pem'),
   cert: fs.readFileSync('./src/keys/cert.pem')
 };
 
-
+*/
 
 
 app.use('/', userRoutes);
@@ -32,15 +35,14 @@ app.use(errorMiddleware);
 
 
 
-if(config.nodeEnv === "prod") {
-  /*
-   app.listen(port, async () => {
-    await connectToMongoDatabase(config.DB_PROD_URI_FINAL)
-    //fetchAllData(config.databaseFetchUrl);
+
+app.listen(port, async () => {
+    await connectToMongoDatabase(config.DB_PROD_IDO_PROJET)
     console.log("Serveur prod started");
     console.log(`Server is running on port http://localhost:${port}`);
-    });
-*/
+});
+
+/*
     https.createServer(options, app).listen(port, async () => {
       await connectToMongoDatabase(config.DB_PROD_URI_FINAL)
       //fetchAllData(config.databaseFetchUrl);
@@ -49,6 +51,7 @@ if(config.nodeEnv === "prod") {
       }).on('error', () => {
         console.error('HTTPS server error:', err);
       });
-} 
+      */
+//}
 
 export default app;

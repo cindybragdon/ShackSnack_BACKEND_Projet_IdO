@@ -1,20 +1,19 @@
 {
+  "name": "shacksnack_backend_projet_ido",
+  "description": "<h2 align=\"center\">ShackSnack_BACKEND_Projet_IdO : Gâtez vos animaux sainement</h2>",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "type":"module",
+  "scripts": {
+    "test": "npm test",
+    "start": "node ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mongoose": "^8.9.5"
-  },
-  "name": "shacksnack_backend_projet_ido",
-  "description": "<h2 align=\"center\">ShackSnack_BACKEND_Projet_IdO : Gâtez vos animaux sainement</h2>",
-  "version": "1.0.0",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "npm test"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }

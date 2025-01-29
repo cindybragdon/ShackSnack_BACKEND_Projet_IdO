@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import createModel from "./manageModels";
+import createModel from "./manageModels.js";
 
 const deviceShemaDefinition = new Schema({
     name: {

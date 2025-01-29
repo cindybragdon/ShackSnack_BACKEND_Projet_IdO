@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { regexEmail } from "../utils/regex";
-import userMongoModel from "../models/mongo.model.user";
-import { DeviceModel } from "../models/mongo.model.device";
+import { regexEmail } from "../utils/regex.js";
+import userMongoModel from "../models/mongo.model.user.js";
+import { DeviceModel } from "../models/mongo.model.device.js";
 
 export function validateFormatMiddleware(req, res, next) {
 

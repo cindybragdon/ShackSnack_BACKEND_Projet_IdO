@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+import createModel from "./manageModels.js";
 
 const feedingLogs = Schema({
     userId: { 

@@ -52,3 +52,5 @@ class BaseService {
         return this.model.findByIdAndDelete(id);
     }
 }
+
+export default BaseService;
