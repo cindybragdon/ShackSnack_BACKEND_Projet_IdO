@@ -1,6 +1,5 @@
 import { Schema } from "mongoose";
-import { regexPositiveInt, regexPositiveNumber } from "../utils/regex.js";
-import createModel from "./manageModels.js";
+import { regexPositiveNumber } from "../utils/regex.js";
 
 const animalShemaDefinition = new Schema({
     name: {
@@ -28,7 +27,7 @@ const animalShemaDefinition = new Schema({
         type: Number,
         required: true,
         validate: {
-            validator: (value) => regexPositiveInt.test(value.toString()),
+            validator: (value) => regexPositiveNumber.test(value.toString()),
             message: 'The number_sec_treat needs to be a positive int number.'
         }
     },
@@ -36,16 +35,13 @@ const animalShemaDefinition = new Schema({
         type: Number,
         required: true,
         validate: {
-            validator: (value) => regexPositiveInt.test(value.toString()),
+            validator: (value) => regexPositiveNumber.test(value.toString()),
             message: 'The number_sec_food needs to be a positive int number.'
         }
     }
 }, { timestamps: true })
 
-const AnimalModel = createModel("Animal", animalShemaDefinition);
-
 export default animalShemaDefinition;
 
-export { AnimalModel };
 
 

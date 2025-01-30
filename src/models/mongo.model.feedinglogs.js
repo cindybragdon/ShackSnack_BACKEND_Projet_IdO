@@ -1,5 +1,4 @@
-import { Schema } from "mongoose";
-import createModel from "./manageModels.js";
+import mongoose, { Schema } from "mongoose";
 
 const feedingLogs = Schema({
     userId: { 
@@ -35,6 +34,6 @@ const feedingLogs = Schema({
 }, { timestamps: true });
 
 
-const feedingLogsModel = createModel('FeedingLogs', feedingLogs);
+const feedingLogsModel = mongoose.model('FeedingLogs', feedingLogs);
 
 export default feedingLogsModel;

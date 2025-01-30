@@ -2,148 +2,135 @@ import userMongoModel from "../models/mongo.model.user.js";
 import BaseService from "../services/mongo.baseService.js";
 import SubdocumentService from "../services/mongo.SubdocumentService.js";
 
-class UserController {
-    constructor() {
-        this.baseService = new BaseService(userMongoModel);
-        this.subdocumentService = new SubdocumentService(userMongoModel);
-    }
 
-    async getAllUsers(req, res) {
+
+const baseService = new BaseService(userMongoModel);
+const subdocumentService = new SubdocumentService(userMongoModel);
+
+class UserController {
+
+
+    async getAllUsers(req, res, next) {
         try {
-            const users = await this.baseService.getAll();
+            const users = await baseService.getAll();
             if (!users || users.length === 0) {
                 return res.status(404).json({ message: "No users found." });
             }
             res.status(200).json(users);
         } catch (error) {
-            this.handleError(res, error, "Error fetching users");
+            next(error);
         }
     }
 
-    async getUserById(req, res) {
+    async getUserById(req, res, next) {
         try {
-            const user = await this.baseService.getById(req.params.id);
+            const user = await baseService.getById(req.params.id);
             if (!user) {
                 return res.status(404).json({ message: "User not found." });
             }
             res.status(200).json(user);
         } catch (error) {
-            this.handleError(res, error, "Error fetching user");
+            next(error);
         }
     }
 
-    async createUser(req, res) {
+    async createUser(req, res, next) {
         try {
-            const newUser = await this.baseService.create(req.body);
+            const newUser = await baseService.create(req.body);
             res.status(201).json(newUser);
         } catch (error) {
-            this.handleError(res, error, "Error creating user");
+            next(error);
         }
     }
 
-    async updateUser(req, res) {
+    async updateUser(req, res, next) {
         try {
-            const updatedUser = await this.baseService.update(req.params.id, req.body);
+            const updatedUser = await baseService.update(req.params.id, req.body);
             if (!updatedUser) {
                 return res.status(404).json({ message: "User not found." });
             }
             res.status(200).json(updatedUser);
         } catch (error) {
-            this.handleError(res, error, "Error updating user");
+            next(error);
         }
     }
 
-    async deleteUser(req, res) {
+    async deleteUser(req, res, next) {
         try {
-            const deletedUser = await this.baseService.delete(req.params.id);
+            const deletedUser = await baseService.delete(req.params.id);
             if (!deletedUser) {
                 return res.status(404).json({ message: "User not found." });
             }
             res.status(200).json({ message: "User deleted successfully." });
         } catch (error) {
-            this.handleError(res, error, "Error deleting user");
+            next(error);
         }
     }
 
 
-    async getAllSubdocuments(req, res) {
+    async getAllSubdocuments(req, res, next) {
         try {
-            const subdocuments = await this.subdocumentService.getAllSubdocuments(req.params.id, req.params.subdocument,);
+            const subdocuments = await subdocumentService.getAllSubdocuments(req.params.id, req.params.subdocument,);
             if (!subdocuments || subdocuments.length === 0) {
                 return res.status(404).json({ message: "No subdocument found." });
             }
             res.status(200).json(subdocuments);
         } catch (error) {
-            this.handleError(res, error, "Error fetching users");
+            next(error);
         }
     }
 
 
     
-    async getSubdocumentById(req, res) {
+    async getSubdocumentById(req, res, next) {
         try {
-            const subdocuments = await this.subdocumentService.getById(req.params.id, req.params.subdocument, req.params.subdocId);
+            const subdocuments = await subdocumentService.getSubdocumentById(req.params.id, req.params.subdocument, req.params.subdocId);
             if (!subdocuments) {
                 return res.status(404).json({ message: "Subdocument not found." });
             }
-            res.status(200).json(user);
+            res.status(200).json(subdocuments);
         } catch (error) {
-            this.handleError(res, error, "Error fetching user");
+            next(error);
         }
     }
 
-    async createSubdocument(req, res) {
+    async createSubdocument(req, res, next) {
         try {
-            const updatedUser = await this.subdocumentService.createSubdocument(req.params.id, req.params.subdocument, req.body);
+            const updatedUser = await subdocumentService.createSubdocument(req.params.id, req.params.subdocument, req.body);
             if (!updatedUser) {
                 return res.status(404).json({ message: "User not found." });
             }
             res.status(200).json(updatedUser);
         } catch (error) {
-            this.handleError(res, error, "Error creating subdocument");
+            next(error);
         }
     }
 
-    async updateSubdocument(req, res) {
+    async updateSubdocument(req, res, next) {
         try {
-            const updatedUser = await this.subdocumentService.updateSubdocument(req.params.id, req.params.subdocument, req.params.subdocId, req.body);
+            const updatedUser = await subdocumentService.updateSubdocument(req.params.id, req.params.subdocument, req.params.subdocId, req.body);
             if (!updatedUser) {
                 return res.status(404).json({ message: "User or subdocument not found." });
             }
             res.status(200).json(updatedUser);
         } catch (error) {
-            this.handleError(res, error, "Error updating subdocument");
+            next(error);
         }
     }
 
-    async deleteSubdocument(req, res) {
+    async deleteSubdocument(req, res, next) {
         try {
-            const updatedUser = await this.subdocumentService.deleteSubdocument(req.params.id, req.params.subdocument, req.params.subdocId);
+            const updatedUser = await subdocumentService.deleteSubdocument(req.params.id, req.params.subdocument, req.params.subdocId);
             if (!updatedUser) {
                 return res.status(404).json({ message: "User or subdocument not found." });
             }
             res.status(200).json(updatedUser);
         } catch (error) {
-            this.handleError(res, error, "Error deleting subdocument");
+            next(error);
         }
     }
 
-    // Handle errors thrown by the service
-    handleError(res, error, defaultMessage) {
-        if (error.status === 400) {
-            // Handle 400 validation errors
-            return res.status(400).json({
-                error: error.message || "Bad Request",
-                details: error.details || null
-            });
-        }
 
-        // Log internal errors for debugging
-        console.error(defaultMessage, error);
-
-        // Return 500 Internal Server Error if it's not a validation error
-        res.status(500).json({ message: "Internal Server Error" });
-    }
 }
 
 export default UserController;

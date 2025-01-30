@@ -1,6 +1,5 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { regexEmail } from "../utils/regex.js";
-import createModel from "./manageModels.js";
 import animalShemaDefinition from "./mongo.model.animal.js";
 import deviceShemaDefinition from "./mongo.model.device.js";
 import notificationsShemaDefinition from "./mongo.model.notifications.js";
@@ -47,6 +46,6 @@ const userSchemaDefinition = new Schema({
 
 }, { timestamps: true });
 
-const userMongoModel = createModel('User', userSchemaDefinition);
+const userMongoModel = mongoose.model('User', userSchemaDefinition);
 
 export default userMongoModel;
