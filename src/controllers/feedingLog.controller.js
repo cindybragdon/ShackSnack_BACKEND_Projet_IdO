@@ -11,7 +11,7 @@ class FeedingLogsController {
     
     async getFeedingLogsByUserId(req, res, next) {
         try {
-            const feedingLogs = await feedingLogService.getFeedingLogsByAttribute('userId', req.params.userId);
+            const feedingLogs = await feedingLogService.getFeedingLogsByAttribute('userId', req.params.id);
             if (!feedingLogs || feedingLogs.length === 0) {
                 const error = createError("No FeedingLog found.", 404);
                 return next(error);
