@@ -1,6 +1,7 @@
 import feedingLogsModel from "../models/mongo.model.feedinglogs.js";
 import BaseService from "../services/mongo.baseService.js";
 import FeedingLogService from "../services/mongo.feedingLogService.js";
+import { createError } from "../utils/error.createError.js";
 
 
 const baseService = new BaseService(feedingLogsModel)
@@ -12,7 +13,8 @@ class FeedingLogsController {
         try {
             const feedingLogs = await feedingLogService.getFeedingLogsByAttribute('userId', req.params.userId);
             if (!feedingLogs || feedingLogs.length === 0) {
-                return res.status(404).json({ message: "No FeedingLog found." });
+                const error = createError("No FeedingLog found.", 404);
+                return next(error);
             }
             res.status(200).json(feedingLogs);
         } catch (error) {
@@ -24,7 +26,8 @@ class FeedingLogsController {
         try {
             const feedingLogs = await feedingLogService.getFeedingLogsByAttribute('animalId', req.params.animalId);
             if (!feedingLogs || feedingLogs.length === 0) {
-                return res.status(404).json({ message: "No FeedingLog found." });
+                const error = createError("No FeedingLog found.", 404);
+                return next(error);
             }
             res.status(200).json(feedingLogs);
         } catch (error) {

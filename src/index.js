@@ -49,7 +49,7 @@ app.listen(port, async () => {
       console.log("Serveur prod started");
       console.log(`Server is running on port https://localhost:${port}`);
       }).on('error', () => {
-        console.error('HTTPS server error:', err);
+        console.error('HTTPS server error:', error);
       });
       */
 //}
