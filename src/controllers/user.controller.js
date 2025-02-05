@@ -40,18 +40,7 @@ class UserController {
 
     async createUser(req, res, next) {
         try {
-
-            const createUserData = req.body;
-
-            if(!createUserData.password) {
-                const error = createError("Password is required", 400);
-                error.details = "Procured password is : " + req.body.password;
-                next(error);
-            }
-            createUserData.password = await bcrypt.hash(req.body.password, 10);
-
-
-            const newUser = await baseService.create(createUserData);
+            const newUser = await baseService.create(req.body);
             res.status(201).json(newUser);
         } catch (error) {
             next(error);
@@ -61,16 +50,8 @@ class UserController {
     async updateUser(req, res, next) {
         try {
 
-            const updateUserData = req.body;
+            const updatedUser = await baseService.update(req.params.id, req.body);
 
-            if(!updateUserData.password) {
-                const error = createError("Password is required", 400);
-                error.details = "Procured password is : " + req.body.password;
-                next(error);
-            }
-            updateUserData.password = await bcrypt.hash(req.body.password, 10);
-
-            const updatedUser = await baseService.update(req.params.id, updateUserData);
             if (!updatedUser) {
                 const error = createError("User not found", 404);
                 return next(error);
@@ -166,17 +147,13 @@ class UserController {
 
     async createNewAccount(req, res, next) {
         try {
-            const newUser = req.body;
+            
+            const createdUser = await baseService.create(req.body);
+            const token = jwt.sign({ id: createdUser._id, role: createdUser.role }, config.jwtSecret, {
+                expiresIn: '1h',
+            });
 
-            if(!newUser.password) {
-                const error = createError("Password is required", 400);
-                error.details = "Procured password is : " + newUser.password;
-                next(error);
-            }
-            newUser.password = await bcrypt.hash(req.body.password, 10);
-
-            const createdUser = await baseService.create(newUser);
-            res.status(201).json(createdUser);
+            res.status(201).json({ token, createdUser: { id: createdUser._id, email: createdUser.email, role: createdUser.role } });
         } catch (error) {
             next(error);
         }

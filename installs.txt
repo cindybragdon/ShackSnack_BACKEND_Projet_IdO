@@ -12,3 +12,7 @@ npm i mongoose
 http :
 npm i express
 npm install cors
+
+tests :
+npm install --save-dev jest
+

@@ -29,6 +29,9 @@ class BaseService {
         // Merge new data into the existing document
         Object.assign(document, data);
 
+
+        document.isUsingBaseRoute = true;
+
         // Save and return the updated document
         return await document.save();
     }
