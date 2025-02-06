@@ -4,7 +4,6 @@ import FeedingLogService from "../services/mongo.feedingLogService.js";
 import { createError } from "../utils/error.createError.js";
 
 
-const baseService = new BaseService(feedingLogsModel)
 const feedingLogService = new FeedingLogService(feedingLogsModel);
 
 class FeedingLogsController {
@@ -37,7 +36,13 @@ class FeedingLogsController {
 
     async createFeedingLog(req, res, next) {
         try {
-            const newFeedingLog = await baseService.create(req.body);
+            const newFeedingLog = await feedingLogService.create(req.body);
+
+            if (!newFeedingLog || newFeedingLog.length === 0) {
+                const error = createError("FeedingLog unable to be created.", 404);
+                error.details = "The userId, animalId or deviceId doesn't exist";
+                return next(error);
+            }
             res.status(201).json(newFeedingLog);
         } catch (error) {
             next(error);

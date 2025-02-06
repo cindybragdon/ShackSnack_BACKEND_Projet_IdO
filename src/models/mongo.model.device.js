@@ -2,7 +2,7 @@ import { Schema } from "mongoose";
 
 
 
-const daySchema = new mongoose.Schema({
+const daySchema = new Schema({
   day: { 
     type: String, 
     required: true, 
@@ -14,12 +14,13 @@ const daySchema = new mongoose.Schema({
   }
 }, { _id: false });
 
-const feedingTimeSchema = new mongoose.Schema({
-    name: { type: String, required:true},
-    hour: { type: Number, required: true },
-    minute: { type: Number, required: true },
-    days: {type: [daySchema], default: function () {
-      return [
+const feedingTimeSchema = new Schema({
+  name: { type: String, required: true },
+  hour: { type: Number, required: true },
+  minute: { type: Number, required: true },
+  days: {
+    type: [daySchema],
+    default: [
         { day: "Monday", isSelected: false },
         { day: "Tuesday", isSelected: false },
         { day: "Wednesday", isSelected: false },
@@ -27,12 +28,9 @@ const feedingTimeSchema = new mongoose.Schema({
         { day: "Friday", isSelected: false },
         { day: "Saturday", isSelected: false },
         { day: "Sunday", isSelected: false }
-      ];
-    }}
+    ]
+  }
 });
-  
-
-
 
 
 const deviceShemaDefinition = new Schema({

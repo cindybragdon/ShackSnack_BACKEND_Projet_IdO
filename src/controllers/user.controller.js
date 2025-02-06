@@ -69,7 +69,7 @@ class UserController {
                 const error = createError("User not found", 404);
                 return next(error);
             }
-            res.status(200).json({ message: "User deleted successfully." });
+            res.status(204).json({ message: "User deleted successfully." });
         } catch (error) {
             next(error);
         }
@@ -111,7 +111,7 @@ class UserController {
                 const error = createError("User not found", 404);
                 return next(error);
             }
-            res.status(200).json(updatedUser);
+            res.status(201).json(updatedUser);
         } catch (error) {
             next(error);
         }
@@ -134,12 +134,12 @@ class UserController {
 
     async deleteSubdocument(req, res, next) {
         try {
-            const updatedUser = await subdocumentService.deleteSubdocument(req.params.id, req.params.subdocument, req.params.subdocId);
-            if (!updatedUser) {
+            const deletedUser = await subdocumentService.deleteSubdocument(req.params.id, req.params.subdocument, req.params.subdocId);
+            if (!deletedUser) {
                 const error = createError("User or subdocument not found.", 404);
                 return next(error);
             }
-            res.status(200).json(updatedUser);
+            res.status(204).json(deletedUser);
         } catch (error) {
             next(error);
         }

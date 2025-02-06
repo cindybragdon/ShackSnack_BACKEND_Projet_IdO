@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "type": "module",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --coverage --runInBand",
     "start": "node ./src/index.js"
   },
   "author": "",

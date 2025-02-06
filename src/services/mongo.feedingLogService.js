@@ -15,7 +15,7 @@ class FeedingLogService {
     // Create a new document
     async create(data) {
 
-        const user = userMongoModel.findById(data.userId);
+        const user = await userMongoModel.findById(data.userId);
         if (!user) {
             return null;
         }

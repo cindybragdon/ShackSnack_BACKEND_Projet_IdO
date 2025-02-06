@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const errorMiddleware = (error, req, res, next) => {
+export const errorMiddleware = (error, res) => {
 
 
 

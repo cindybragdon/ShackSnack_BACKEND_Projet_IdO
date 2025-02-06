@@ -16,14 +16,17 @@ router.post('/users', authenticateToken, verifyAdmin, verifyPermissions, userCon
 router.put('/users/:id', authenticateToken, verifyPermissions, userController.updateUser);
 router.delete('/users/:id', authenticateToken, verifyPermissions, userController.deleteUser);
 
-// User authentification routes
-router.post('/users/login', userController.loginAccount);
-router.post('/users/createAccount', denyCreateAccountAdmin, userController.createNewAccount);
+
 // User Subdocuments Routes
 router.get('/users/:id/:subdocument', authenticateToken, verifyPermissions, userController.getAllSubdocuments);
 router.get('/users/:id/:subdocument/:subdocId', authenticateToken, verifyPermissions, userController.getSubdocumentById);
 router.post('/users/:id/:subdocument', authenticateToken, verifyPermissions, userController.createSubdocument);
 router.put('/users/:id/:subdocument/:subdocId', authenticateToken, verifyPermissions, userController.updateSubdocument);
 router.delete('/users/:id/:subdocument/:subdocId', authenticateToken, verifyPermissions, userController.deleteSubdocument);
+
+
+// User authentification routes
+router.post('/users/login', userController.loginAccount);
+router.post('/users/createAccount', denyCreateAccountAdmin, userController.createNewAccount);
 
 export default router;
