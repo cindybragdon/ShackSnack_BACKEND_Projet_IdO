@@ -35,7 +35,7 @@ describe("<-- VERIFY PERMISSIONS -->", () => {
     
             verifyPermissions(req, res, next)
 
-            const error = new Error("You are not permitted to acces this informations");
+            const error = new Error("You are not permitted to access this information");
             error.status = 403;
 
             expect(next).toHaveBeenCalledWith(error);
@@ -63,7 +63,7 @@ describe("<-- VERIFY PERMISSIONS -->", () => {
     
             verifyPermissions(req, res, next)
 
-            const error = new Error("You are not permitted to acces this informations");
+            const error = new Error("You are not permitted to access this information");
             error.status = 403;
 
             expect(next).toHaveBeenCalledWith(error);
@@ -97,7 +97,7 @@ describe("<-- VERIFY PERMISSIONS -->", () => {
     
             verifyAdmin(req, res, next)
 
-            const error = new Error("You are not permitted to acces this informations");
+            const error = new Error("You are not permitted to access this information");
             error.status = 403;
 
             expect(next).toHaveBeenCalledWith(error);

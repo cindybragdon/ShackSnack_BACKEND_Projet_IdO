@@ -61,32 +61,6 @@ const userSchemaDefinition = new Schema({
 // It makes all the passwords hashed.
 userSchemaDefinition.pre("save", async function(next) {
 
-
-    /*
-    // Verify that a new user cannot have animals, devices or notifications at the creation.
-    if (this.isNew) {
-        // Ensure these fields are empty when creating a new user
-        if (this.animals.length > 0 || this.devices.length > 0 || this.notifications.length > 0) {
-            const error = new createError('Could not save the user', 400);
-            error.details = 'Cannot create a user with animals, devices, or notifications.'
-            return next(error);
-        }
-    }
-    */
-
-    // Verify that a device, an animal and a notification cannot be modified, created or deleted 
-    // From the user route.
-    /*
-    if(this.isUsingBaseRoute) {
-        if (this.isModified('devices') || this.isModified('animals') || this.isModified('notifications')) {
-            const error = new createError('Could not save the user', 400);
-            error.details = 'Modifications of devices, animals, or notifications are not allowed in this route'
-            next(error);
-        }
-    }
-        */
-
-
     if(!this.password) {
         const error = createError("Password is required", 400);
         error.details = "Procured password is : " + this.password;

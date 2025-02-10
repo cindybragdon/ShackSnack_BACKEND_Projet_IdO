@@ -36,7 +36,7 @@ app.use(errorMiddleware);
 
 
 
-app.listen(port, async () => {
+const server = app.listen(port, async () => {
     await connectToMongoDatabase(config.DB_PROD_IDO_PROJET)
     console.log("Serveur prod started");
     console.log(`Server is running on port http://localhost:${port}`);
@@ -54,4 +54,4 @@ app.listen(port, async () => {
       */
 //}
 
-export default app;
+export {server, app};

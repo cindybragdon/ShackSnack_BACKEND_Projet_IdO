@@ -3,13 +3,14 @@ import { errorMiddleware } from "../src/middlewares/errorMiddleware";
 
 
 
-const mockResponse = ()  => {
+const mockResponse = () => {
     const res = {};
     res.status = jest.fn().mockReturnValue(res);
     res.json = jest.fn().mockReturnValue(res);
-    res.send = jest.fn().mockReturnValue(res);
     return res;
 };
+
+const mockNext = jest.fn();
 
 
 describe('errorMiddleware', () => {
@@ -18,9 +19,11 @@ describe('errorMiddleware', () => {
 
     test('should handle 401 Unauthorized error', () => {
         const error = { status: 401, message: 'Unauthorized access' };
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(401);
         expect(res.json).toHaveBeenCalledWith({ message: 'Unauthorized access' });
@@ -29,9 +32,11 @@ describe('errorMiddleware', () => {
 
     test('should handle 401 Unauthorized error', () => {
         const error = { status: 401 };
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(401);
         expect(res.json).toHaveBeenCalledWith({ message: 'Unauthorized' });
@@ -39,9 +44,11 @@ describe('errorMiddleware', () => {
 
     test('should handle 403 Forbidden error', () => {
         const error = { status: 403 };
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(403);
         expect(res.json).toHaveBeenCalledWith({ message: 'Forbidden' });
@@ -50,9 +57,11 @@ describe('errorMiddleware', () => {
 
     test('should handle 404 Not Found error', () => {
         const error = { status: 404 };
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(404);
         expect(res.json).toHaveBeenCalledWith({ message: 'Ressource not found' });
@@ -60,9 +69,11 @@ describe('errorMiddleware', () => {
 
     test('should handle Mongoose CastError', () => {
         const error = new mongoose.Error.CastError('ObjectId', 'invalid-id', '_id');
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({
@@ -75,9 +86,11 @@ describe('errorMiddleware', () => {
 
     test('should handle Mongoose CastError', () => {
         const error = new mongoose.Error.CastError('ObjectId', 'invalid-id');
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({
@@ -93,9 +106,11 @@ describe('errorMiddleware', () => {
             name: { message: 'Name is required' },
             age: { message: 'Age must be a number' }
         };
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({
@@ -109,9 +124,11 @@ describe('errorMiddleware', () => {
 
     test('should handle TypeError', () => {
         const error = new TypeError('Cannot read property of undefined');
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json).toHaveBeenCalledWith({
@@ -126,9 +143,11 @@ describe('errorMiddleware', () => {
             code: 11000,
             keyValue: { email: 'test@example.com' }
         };
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(409);
         expect(res.json).toHaveBeenCalledWith({
@@ -141,9 +160,11 @@ describe('errorMiddleware', () => {
     test('should handle unexpected errors', () => {
         const error = new Error();
         error.status = 451;
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(451);
         expect(res.json).toHaveBeenCalledWith({
@@ -155,9 +176,11 @@ describe('errorMiddleware', () => {
 
     test('should handle other unknown errors', () => {
         const error = new Error('Unexpected error');
+        const req = {};
         const res = mockResponse();
+        const next = mockNext;
 
-        errorMiddleware(error, res);
+        errorMiddleware(error, req, res, next);
 
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({ error: 'Internal Server Error' });
