@@ -153,7 +153,20 @@ class UserController {
                 expiresIn: '1h',
             });
 
-            res.status(201).json({ token, createdUser: { id: createdUser._id, email: createdUser.email, role: createdUser.role } });
+            res.status(201).json({ token, user: { 
+                id: createdUser._id, 
+                username: createdUser.username,
+                firstname: createdUser.firstname, 
+                lastname: createdUser.lastname,
+                description: createdUser.description,
+                email: createdUser.email, 
+                role: createdUser.role,
+                expoPushToken: createdUser.expoPushToken
+            },
+                animals:createdUser.animals,
+                devices:createdUser.devices
+                
+            });
         } catch (error) {
             next(error);
         }
@@ -187,11 +200,25 @@ class UserController {
             }
 
             // 3. Generate a JWT token (e.g., valid for 1 hour)
+            console.log(user);
             const token = jwt.sign({ id: user._id, role: user.role }, config.jwtSecret, {
-                expiresIn: '1h',
+                expiresIn: '5h',
             });
 
-            return res.status(200).json({ token, user: { id: user._id, email: user.email, role: user.role } });
+            return res.status(200).json({ token, user: { 
+                id: user._id, 
+                username: user.username,
+                firstname: user.firstname, 
+                lastname: user.lastname,
+                description: user.description,
+                email: user.email, 
+                role: user.role,
+                expoPushToken: user.expoPushToken
+            },
+                animals:user.animals,
+                devices:user.devices
+                
+            });
         } catch (error) {
             next(error);
         }
