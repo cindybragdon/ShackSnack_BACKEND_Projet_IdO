@@ -33,13 +33,15 @@ app.use('/', feedingLogsRoutes);
 
 app.use(errorMiddleware);
 
-
+app.get('/', (req, res) => {
+  res.send('Welcome to SnackShack API');
+});
 
 
 const server = app.listen(port, async () => {
-    await connectToMongoDatabase(config.DB_PROD_IDO_PROJET)
-    console.log("Serveur prod started");
-    console.log(`Server is running on port http://localhost:${port}`);
+  await connectToMongoDatabase(config.DB_PROD_IDO_PROJET)
+  console.log("Serveur prod started");
+  console.log(`Server is running on port http://localhost:${port}`);
 });
 
 /*

@@ -61,12 +61,9 @@ const userSchemaDefinition = new Schema({
 // It makes all the passwords hashed.
 userSchemaDefinition.pre("save", async function(next) {
 
-    if(!this.password) {
-        const error = createError("Password is required", 400);
-        error.details = "Procured password is : " + this.password;
-        next(error);
+    if (this.isNew || this.isModified("password")) {
+        this.password = await bcrypt.hash(this.password, 10);
     }
-    this.password = await bcrypt.hash(this.password, 10);
     next();
 });
 
