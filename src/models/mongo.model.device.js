@@ -45,6 +45,16 @@ const deviceShemaDefinition = new Schema({
   feedingTimes: {
       type: [feedingTimeSchema],
       default: []
+  },
+  isVacationModeActive: {
+      type: Boolean,
+      required: true,
+      default: false
+  },
+  vacationFeedingTime: {
+      type: Number,
+      required: true,
+      default: 2
   }
 });
 
