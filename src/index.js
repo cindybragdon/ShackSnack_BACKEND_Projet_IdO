@@ -24,7 +24,7 @@ app.use('/', feedingLogsRoutes);
 app.use(errorMiddleware);
 
 app.get('/', (req, res) => {
-  res.send('Welcome to SnackShack API');
+  res.send('Welcome to SnackShack API 🦮🐈🐕🐈‍⬛🐕‍🦺');
 });
 
 // Fonction pour récupérer l'adresse IPv4 locale
