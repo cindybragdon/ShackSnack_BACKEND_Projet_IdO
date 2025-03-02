@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import { config } from '../config/config.js';
 import { createError } from '../utils/error.createError.js';
 
+//Middleware pour authoriser le token ou le refuser
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
 

@@ -1,7 +1,8 @@
 import { Schema } from "mongoose";
 
 
-
+//Shéma mongoose d'un device.
+//Utilisé pour le mode vacances
 const daySchema = new Schema({
   day: { 
     type: String, 

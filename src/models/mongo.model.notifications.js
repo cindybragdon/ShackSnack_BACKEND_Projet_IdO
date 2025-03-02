@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
 
+//Shéma mongoose d'une notification
 const notificationsShemaDefinition = new Schema({
 
     message: {

@@ -1,10 +1,10 @@
+//Middleware qui gère toutes les erreurs possibles de l'API
+
 import mongoose from "mongoose";
 
 export const errorMiddleware = (error, req, res, next) => {
 
-
-
-      // Handle known errors with specific status codes
+    // Handle known errors with specific status codes
     if (error.status === 401) {
         return res.status(401).json({ message: error.message || "Unauthorized" });
     }

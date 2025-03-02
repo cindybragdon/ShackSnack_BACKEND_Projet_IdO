@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 
 dotenv.config();
-
+//Config de l'application (variables d'env)
 export const config = {
   port: process.env.PORT || 4837,
   jwtSecret: process.env.JWT_SECRET || 'I_LOVE_OVERFEEDING_MY_ANIMALS_OMG',

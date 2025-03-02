@@ -1,6 +1,7 @@
 import { Schema } from "mongoose";
 import { regexPositiveNumber } from "../utils/regex.js";
 
+//Shéma mongoose d'un animal
 const animalShemaDefinition = new Schema({
     name: {
         type: String,
