@@ -42,6 +42,17 @@ const getLocalIPv4 = () => {
 
 const ipAddress = getLocalIPv4();
 
+
+const server = app.listen(port, async () => {
+  await connectToMongoDatabase(config.DB_PROD_IDO_PROJET);
+  console.log("✅ Serveur HTTP démarré !");
+  console.log(`🌍 Accessible à :`);
+  console.log(`   🔹 http://localhost:${port}`);
+  console.log(`   🔹 http://${ipAddress}:${port}`);
+  console.log("➡️  Veuillez accéder à l'une de ces pages pour accepter l'accès")
+})
+
+/*
 const server = https.createServer(options, app).listen(port, async () => {
   await connectToMongoDatabase(config.DB_PROD_IDO_PROJET);
   console.log("✅ Serveur HTTPS démarré !");
@@ -50,5 +61,5 @@ const server = https.createServer(options, app).listen(port, async () => {
   console.log(`   🔹 https://${ipAddress}:${port}`);
   console.log("➡️  Veuillez accéder à l'une de ces pages pour accepter l'accès")
 });
-
+*/
 export { server, app };
