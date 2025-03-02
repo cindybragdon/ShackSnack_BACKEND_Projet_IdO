@@ -6,12 +6,16 @@ import { createError } from "../utils/error.createError.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+//Controller de User
 
+
+//Services du user
 const baseService = new BaseService(userMongoModel);
 const subdocumentService = new SubdocumentService(userMongoModel);
 
 class UserController {
 
+    //Avoir la liste de tout les users (admin)
     async getAllUsers(req, res, next) {
         try {
             const users = await baseService.getAll();
@@ -25,6 +29,7 @@ class UserController {
         }
     }
 
+    //Avoir un user par son ID(admin)
     async getUserById(req, res, next) {
         try {
             const user = await baseService.getById(req.params.id);
@@ -38,6 +43,7 @@ class UserController {
         }
     }
 
+    //Créer un nouveau user (admin)
     async createUser(req, res, next) {
         try {
             const newUser = await baseService.create(req.body);
@@ -47,6 +53,7 @@ class UserController {
         }
     }
 
+    //Update un user par son ID
     async updateUser(req, res, next) {
         try {
 
@@ -62,6 +69,7 @@ class UserController {
         }
     }
 
+    //Delete in user par son ID
     async deleteUser(req, res, next) {
         try {
             const deletedUser = await baseService.delete(req.params.id);
@@ -76,9 +84,10 @@ class UserController {
     }
 
 
+    //Avoir tout les sous document d'un certain type d'un user
     async getAllSubdocuments(req, res, next) {
         try {
-            const subdocuments = await subdocumentService.getAllSubdocuments(req.params.id, req.params.subdocument,);
+            const subdocuments = await subdocumentService.getAllSubdocuments(req.params.id, req.params.subdocument);
             if (!subdocuments || subdocuments.length === 0) {
                 const error = createError("No subdocument found.", 404);
                 return next(error);
@@ -90,7 +99,7 @@ class UserController {
     }
 
 
-    
+    //Avoir un sous document par son ID en spécifiant de quel type de sous document il s'agit
     async getSubdocumentById(req, res, next) {
         try {
             const subdocuments = await subdocumentService.getSubdocumentById(req.params.id, req.params.subdocument, req.params.subdocId);
@@ -104,6 +113,7 @@ class UserController {
         }
     }
 
+    //Créer un sous document
     async createSubdocument(req, res, next) {
         try {
             const updatedUser = await subdocumentService.createSubdocument(req.params.id, req.params.subdocument, req.body);
@@ -117,6 +127,7 @@ class UserController {
         }
     }
 
+    //Updater un sous document
     async updateSubdocument(req, res, next) {
         try {
 
@@ -132,6 +143,7 @@ class UserController {
         }
     }
 
+    //Effacer un sous document
     async deleteSubdocument(req, res, next) {
         try {
             const deletedUser = await subdocumentService.deleteSubdocument(req.params.id, req.params.subdocument, req.params.subdocId);
@@ -145,6 +157,7 @@ class UserController {
         }
     }
 
+    //Créer un nouveau compte
     async createNewAccount(req, res, next) {
         try {
             
@@ -172,7 +185,7 @@ class UserController {
         }
     }
 
-    
+    //Logger dans son compte
     async loginAccount(req, res, next) {
         try {
 

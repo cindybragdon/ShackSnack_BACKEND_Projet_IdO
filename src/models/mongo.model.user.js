@@ -6,7 +6,7 @@ import notificationsShemaDefinition from "./mongo.model.notifications.js";
 import bcrypt from 'bcrypt';
 import { createError } from "../utils/error.createError.js";
 
-
+//Shéma mongoose d'un user
 const userSchemaDefinition = new Schema({
 
     firstname: { 

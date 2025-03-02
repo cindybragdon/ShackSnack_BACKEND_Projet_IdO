@@ -1,7 +1,6 @@
 import mongoose from "mongoose"
 
-
-
+//Permet de se connecter à mongoose
 export const connectToMongoDatabase = async (database) => {
     try {
         await mongoose.connect(database);

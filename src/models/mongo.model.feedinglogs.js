@@ -1,5 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
+//Shéma mongoose d'un feeding log.
+//Un feeding log est un log d'une fois ou un certain animal a mangé.
 const feedingLogs = Schema({
     userId: { 
         type: Schema.Types.ObjectId, 

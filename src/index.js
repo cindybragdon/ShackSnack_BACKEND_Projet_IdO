@@ -1,11 +1,12 @@
 import express from 'express';
 import cors from 'cors';
-import os from 'os';
 import { config } from './config/config.js';
 import userRoutes from './routes/user.routes.js';
 import feedingLogsRoutes from './routes/feedingLog.routes.js';
 import { errorMiddleware } from './middlewares/errorMiddleware.js';
 import { connectToMongoDatabase } from './utils/mongo.connectToDatabase.js';
+
+//App
 
 const app = express();
 const port = process.env.PORT || 4837; // Render dynamically assigns a port
