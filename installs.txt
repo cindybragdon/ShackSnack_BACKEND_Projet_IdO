@@ -1,0 +1,19 @@
+npm init
+
+securité :
+npm install dotenv
+npm install jsonwebtoken
+npm install bcrypt
+
+base de données : 
+npm i mongoose
+
+
+http :
+npm i express
+npm install cors
+
+tests :
+npm install --save-dev jest
+npm install --save-dev supertest
+npm install --save-dev @babel/core @babel/preset-env babel-jest
