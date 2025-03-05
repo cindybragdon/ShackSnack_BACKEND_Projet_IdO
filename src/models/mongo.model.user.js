@@ -50,7 +50,16 @@ const userSchemaDefinition = new Schema({
     },
 
     animals: { type: [animalShemaDefinition], default: [] },
-    devices: { type: [deviceShemaDefinition], default: [] },
+    devices: { 
+        type: [deviceShemaDefinition], 
+        default: [], 
+        validate: {
+            validator: function (devices) {
+                return devices.length <= 1;
+            },
+            message: "A user can only have one device."
+        }
+    },
     notifications: { type: [notificationsShemaDefinition], default: [] }
 
 }, { timestamps: true });
@@ -63,6 +72,11 @@ userSchemaDefinition.pre("save", async function(next) {
 
     if (this.isNew || this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, 10);
+    }
+    next();
+
+    if (this.devices.length > 1) {
+        return next(createError(400, "A user can only have one device."));
     }
     next();
 });
